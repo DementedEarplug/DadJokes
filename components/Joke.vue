@@ -1,9 +1,11 @@
 <template>
-  <div class="joke">
+  <nuxt-link :to="`jokes/${id}`">
+      <div class="joke">
       <p>
           {{joke}}
       </p>
   </div>
+  </nuxt-link>
 </template>
 
 <script>
