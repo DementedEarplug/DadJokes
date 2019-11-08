@@ -1,43 +1,40 @@
 <template>
   <div>
-      <nuxt-link to="/jokes">
-          Back to Jokes
-      </nuxt-link>
-      <h2>{{joke}}</h2>
-      <hr/>
-      <small>Joke ID: {{$route.params.id}}</small>
+    <nuxt-link to="/jokes">Back to Jokes</nuxt-link>
+    <h2>{{joke}}</h2>
+    <hr />
+    <small>Joke ID: {{$route.params.id}}</small>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-    data(){
-        return {
-            joke: {
+  data() {
+    return {
+      joke: {}
+    };
+  },
+  async created() {
+    const config = {
+      headers: {
+        Accept: "application/json"
+      }
+    };
 
-            }
-        }
-    },
-    async created(){
-        const config = {
-            headers: {
-                "Accept": "application/json"
-            }
-        }
-
-        try {
-            const response = await axios.get(`https://icanhazdadjoke.com/j/${this.$route.params.id}`, config);
-            this.joke = response.data.joke;
-        } catch (error) {
-            console.log(error)
-        }
-    },
-
-}
+    try {
+      const response = await axios.get(
+        `https://icanhazdadjoke.com/j/${this.$route.params.id}`,
+        config
+      );
+      this.joke = response.data.joke;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 </script>
 
 <style>
-
 </style>
